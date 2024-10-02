@@ -1,0 +1,10 @@
+{
+  "deno.codeLens.implementations": true,
+  "deno.codeLens.references": true,
+  "deno.codeLens.test": true,
+  "deno.enable": true,
+  "deno.envFile": ".env",
+  "deno.future": true,
+  "deno.lint": true,
+  "prettier.enable": false
+}

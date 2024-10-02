@@ -1,0 +1,16 @@
+{
+  "name": "@levma/everhour-api-client",
+  "version": "0.1.1",
+  "license": "MIT-0",
+  "exports": "./main.ts",
+  "tasks": {
+    "dev": "deno run --watch main.ts",
+    "test": "deno test --allow-env --allow-net --env=.env"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1"
+  },
+  "publish": {
+    "exclude": [".env", ".vscode", "*_test.ts"]
+  }
+}
