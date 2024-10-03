@@ -17,7 +17,7 @@ jobs:
         with:
           deno-version: rc
       - run: deno publish
-      - run: deno run build_npm.ts
+      - run: deno run build_npm
       - run: cd npm
       - uses: actions/setup-node@v4
         with:
