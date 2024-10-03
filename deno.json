@@ -1,6 +1,6 @@
 {
   "name": "@levma/everhour-api-client",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT-0",
   "exports": "./main.ts",
   "tasks": {

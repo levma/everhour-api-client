@@ -161,8 +161,17 @@ export type WebhookEventType =
   | "api:client:updated"
   | "api:estimate:updated";
 
+ /**
+  * this class is used to create custom error objects that indicate a required field
+  * is missing or invalid, and can be used to provide more context about the error.
+  */
 export class RequiredError extends Error {
   override name = "RequiredError";
+  /**
+   * Create a RequiredError instance.
+   * @param field The field that was not provided
+   * @param msg Optional message to be displayed
+   */
   constructor(
     public field: string,
     msg?: string,
