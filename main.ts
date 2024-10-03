@@ -32,11 +32,7 @@
  * **Retry-After** response header will specify the number of seconds after the user can make another request.
  * Please contact us first, if you need perform a batch of API requests.
  * Maybe we can provide you a more convenient way to retrieve the data.
- * @module
- */
-
-/**
- * The EverhourApiClient class is a client for interacting with the Everhour API. It provides methods for creating API URLs and making API requests.
+ *
  * @example
  * const client = new EverhourApiClient(apiKey);
  * const users = await getAllUsers(client);
