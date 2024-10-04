@@ -1,3 +1,6 @@
+![Test](https://github.com/levma/everhour-api-client/actions/workflows/test.yml/badge.svg?event=push)
+![Publish](https://github.com/levma/everhour-api-client/actions/workflows/publish.yml/badge.svg)
+
 # Everhour API Client
 
 Simple client to use the everhour API in your javascript or typescript project

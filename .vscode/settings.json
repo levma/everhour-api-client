@@ -6,5 +6,8 @@
   "deno.envFile": ".env",
   "deno.future": true,
   "deno.lint": true,
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
   "prettier.enable": false
 }
