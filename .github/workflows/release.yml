@@ -19,9 +19,10 @@ jobs:
         with:
           deno-version: rc
       - run: deno task client_emit
-      - run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> "$GITHUB_ENV"
+      - uses: little-core-labs/get-git-tag@v3.0.2
+        id: tagName
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "client.js"
           generateReleaseNotes: true
-          tag: "$GIT_TAG"
+          tag: ${{ steps.tagName.outputs.tag }}
