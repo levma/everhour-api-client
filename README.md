@@ -30,6 +30,37 @@ deno add jsr:@levma/everhour-api-client
 npm i @levma/everhour-api-client
 ```
 
+For direct usage in the browser head to
+[Releases](https://github.com/levma/everhour-api-client/releases) and download
+the latest `client.js`
+
+## Usage
+
+### ESM
+
+```ts
+import {
+  EverhourApiClient,
+  getCurrentUser,
+} from "jsr:@levma/everhour-api-client";
+
+const apiKey = Deno.env.get("EVERHOUR_API_KEY");
+const client = new EverhourApiClient(apiKey);
+
+const currentUser = await getCurrentUser(client);
+```
+
+### As script in browser
+
+```html
+<script src="client.js"></script>
+<script>
+  const api = globalThis.EverhourApi;
+  const client = new api.EverhourApiClient("your-api-key");
+  const currentUser = await api.getCurrentUser(client);
+</script>
+```
+
 ## Documentation
 
 Refer to the [Everhour API blueprint](https://everhour.docs.apiary.io/) for more
