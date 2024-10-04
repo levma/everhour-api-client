@@ -6,7 +6,7 @@ on:
     types: [completed]
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     permissions:
