@@ -1,4 +1,4 @@
-![Test & Deploy](https://github.com/levma/everhour-api-client/actions/workflows/test_and_deploy.yml/badge.svg)
+![Publish](https://github.com/levma/everhour-api-client/actions/workflows/publish.yml/badge.svg)
 
 # Everhour API Client
 

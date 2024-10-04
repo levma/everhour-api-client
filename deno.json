@@ -1,13 +1,13 @@
 {
   "name": "@levma/everhour-api-client",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "license": "MIT-0",
   "exports": "./main.ts",
   "tasks": {
     "dev": "deno run --watch main.ts",
     "test": "deno test --allow-env --allow-net --env=.env",
     "build_npm": "deno run -A build_npm.ts",
-    "client_emit": "deno run -A client_emit.ts"
+    "bundle_client": "deno run -A bundle_client.ts"
   },
   "imports": {
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3",
@@ -21,8 +21,9 @@
       ".vscode/",
       "*_test.ts",
       "build_npm.ts",
+      "bundle_client.ts",
+      "client.js",
       "client.ts",
-      "client_emit.ts",
       "npm/"
     ]
   }
