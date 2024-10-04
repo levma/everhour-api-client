@@ -17,10 +17,9 @@ jobs:
         with:
           deno-version: rc
       - run: deno task client_emit
-      - run: echo ::set-output name=current_tag::"echo $(git describe --tags --abbrev=0)"
-        id: tag
+      - run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> "$GITHUB_ENV"
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "client.js"
           generateReleaseNotes: true
-          tag: ${{ steps.tag.outputs.current_tag }}
+          tag: "$GIT_TAG"
