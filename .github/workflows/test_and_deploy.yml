@@ -1,0 +1,52 @@
+name: Test & Deploy
+
+on: 
+  push:
+    tags:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: rc
+      - run: deno task test
+        env:
+          EVERHOUR_API_KEY: ${{ secrets.EVERHOUR_API_KEY }}
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: rc
+      - run: deno publish
+      - run: deno task build_npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm publish --provenance --access public
+        working-directory: ./npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: rc
+      - run: deno task client_emit
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "client.js"
+          generateReleaseNotes: true
