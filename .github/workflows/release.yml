@@ -1,0 +1,22 @@
+name: Release
+
+on: 
+  push:
+    tags:
+    - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: rc
+      - run: deno task client_emit
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "client.js"
+          generateReleaseNotes: true

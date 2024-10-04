@@ -1,5 +1,6 @@
 ![Test](https://github.com/levma/everhour-api-client/actions/workflows/test.yml/badge.svg?event=push)
 ![Publish](https://github.com/levma/everhour-api-client/actions/workflows/publish.yml/badge.svg)
+![Release](https://github.com/levma/everhour-api-client/actions/workflows/release.yml/badge.svg)
 
 # Everhour API Client
 
