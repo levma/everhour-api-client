@@ -1,9 +1,9 @@
 name: Test
 
-on:
+on: 
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   publish:
