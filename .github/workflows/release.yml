@@ -22,4 +22,4 @@ jobs:
         with:
           artifacts: "client.js"
           generateReleaseNotes: true
-          tag: $GIT_TAG
+          tag: ${{ env.GIT_TAG }}
