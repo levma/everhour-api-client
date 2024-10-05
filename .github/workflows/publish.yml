@@ -35,7 +35,7 @@ jobs:
       - uses: denoland/setup-deno@v1
         with:
           deno-version: rc
-      - run: deno task client_emit
+      - run: deno task bundle_client
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "client.js"
