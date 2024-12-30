@@ -877,11 +877,56 @@ export interface TimerRequest {
 
 export interface User {
   avatarUrl?: string;
+  avatarUrlLarge?: string;
   headline?: string;
   id: number;
   name: string;
   role: UserRoleType;
   status: UserStatusType;
+
+  isEmailVerified: boolean;
+  costHistory: Array<{
+    id: number;
+    cost: number;
+    /** YYYY-MM-DD */
+    appliedFrom?: string;
+    /** YYYY-MM-DD HH:mm:ss */
+    createdAt: string;
+  }>;
+  cost: number;
+  resourcePlannerAccess: {
+    viewMine: boolean;
+    editMine: boolean;
+    viewAll: boolean;
+    editAll: boolean;
+  };
+  timeTrackingPolicy: {
+    allowTimeWithoutTask: boolean;
+    allowManualTimeInput: boolean;
+    allowFutureTime: boolean;
+    allowCompletedTaskTime: boolean;
+    allowTimeWithoutEstimate: boolean;
+    allowExceedEstimate: boolean;
+    allowManageEstimates: boolean;
+  };
+  permissions: {
+    billingBudgets?: "read" | "write";
+    userLimits?: "read" | "write";
+    costs?: "read" | "write";
+    invoices?: "read" | "write";
+    expenses?: "read" | "write";
+  };
+  email: string;
+  /** YYYY-MM-DD HH:mm:ss */
+  createdAt: string;
+  groups: Array<{
+    id: number;
+    name: string;
+  }>;
+  type: string;
+  rate?: number;
+  capacity?: number;
+  enableResourcePlanner: boolean;
 }
 
 export interface UsersDashboardItem {
