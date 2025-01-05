@@ -1754,10 +1754,14 @@ export async function getSection(
 
 /**
  * @summary Get Task
+ * @param {string} taskId Task ID
  * @throws {RequiredError}
  */
-export async function getTask(client: EverhourApiClient): Promise<Task> {
-  const url = client.createUrl("/tasks/{taskId}");
+export async function getTask(
+  client: EverhourApiClient,
+  taskId: string,
+): Promise<Task> {
+  const url = client.createUrl("/tasks/{taskId}", { taskId });
   return await client.apiRequest("GET", url);
 }
 
