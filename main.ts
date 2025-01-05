@@ -678,30 +678,39 @@ export interface SectionRequest {
 }
 
 export interface Task {
-  attributes?: TaskAttributes;
+  id: string;
+  /** DateTime `Y-m-d H:i:s` */
+  createdAt?: string;
+  name: string;
   description?: string;
+  type?: string;
+  status?: TaskStatus;
+  url?: string;
+  /** Project IDs */
+  projects: string[];
+  number?: string;
+  labels?: string[];
+  rate?: number;
+  time?: TaskTime;
+  attributes?: TaskAttributes;
+  completed?: boolean;
+  assignees?: number[];
   /** Format: Y-m-d H:i:s */
   dueAt?: string;
   estimate?: TaskEstimate;
-  id: string;
-  labels?: string[];
   metrics?: TaskMetrics;
-  name: string;
-  position?: number;
-  projects: string[];
   /** Section ID */
   section?: number;
-  status?: TaskStatusType;
-  time?: TaskTime;
+  position?: number;
   unbillable?: boolean;
 }
 
-export type TaskStatusType = "open" | "closed";
+export type TaskStatus = "open" | "closed";
 
 /**
  * Custom attributes from integration
  */
-export interface TaskAttributes {
+export interface TaskAttributes extends Record<string, string | undefined> {
   /** example of custom attribute Client */
   client?: string;
   /** example of custom attribute Priority */
@@ -725,7 +734,7 @@ export interface UserSpecificValue {
 /**
  * Custom metrics from integration
  */
-export interface TaskMetrics {
+export interface TaskMetrics extends Record<string, number | undefined> {
   /** example of custome metric efforts */
   efforts?: number;
   /** example of custome metric expenses */
@@ -741,10 +750,8 @@ export interface TaskRequest {
   position?: number;
   /** Section ID */
   section: number;
-  status?: TaskType;
+  status?: TaskStatus;
 }
-
-export type TaskType = "open" | "closed";
 
 export interface TaskTime {
   /** Total task time in seconds */
@@ -771,16 +778,19 @@ export interface TimeExportObjectUser {
 }
 
 export interface TimeHistory {
+  /** Time record history ID */
+  id: number;
   action: TimeRecordAction;
   createdAt?: string;
   /** User ID */
   createdBy: number;
-  /** Time record history ID */
-  id: number;
-  /** Previous time in seconds */
-  previousTime: number;
   /** Time difference in seconds */
   time: number;
+  /** Previous time in seconds */
+  previousTime: number;
+  previousDate: string | null;
+  previousTask: number | null;
+  warning: string | null;
 }
 
 export type TimeRecordAction =
@@ -792,22 +802,25 @@ export type TimeRecordAction =
   | "MOVE";
 
 export interface TimeRecord {
-  comment?: string;
-  /** Date */
-  date: string;
-  history?: TimeHistory[];
   /** Time record ID */
   id: number;
-  isInvoiced?: boolean;
-  isLocked?: boolean;
-  task?: Task;
-  /** Time recorded in seconds */
-  time: number;
+  /** Date `YYYY-MM-DD` */
+  date: string;
+  /** DateTime `YYYY-MM-DD HH:mm:ss` */
+  createdAt: string;
   /** User ID */
   user: number;
+  /** Time recorded in seconds */
+  time: number;
+  comment?: string;
+  task?: Task;
+  history?: TimeHistory[];
+  isInvoiced?: boolean;
+  isLocked?: boolean;
+  lockReasons?: string[];
+  cost?: number;
+  costRate?: number;
 }
-
-export type UserTimeRecord = Omit<TimeRecord, "history">;
 
 export interface TimeRecordRequest {
   /** Comment */
@@ -1807,7 +1820,7 @@ export async function getUserTimeRecords(
   to?: string,
   limit?: number,
   page?: number,
-): Promise<UserTimeRecord[]> {
+): Promise<TimeRecord[]> {
   const url = client.createUrl(
     "/users/{userId}/time",
     { userId },
