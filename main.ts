@@ -789,7 +789,7 @@ export interface TimeHistory {
   /** Previous time in seconds */
   previousTime: number;
   previousDate: string | null;
-  previousTask: number | null;
+  previousTask: string | null;
   warning: string | null;
 }
 
